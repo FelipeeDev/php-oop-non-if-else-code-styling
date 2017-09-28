@@ -33,6 +33,48 @@ So we can say that object-oriented programming is uncompromising and:
 2. It's testable!!
 3. It's has readable code and programming interface!!!
 
+```
+    class Opener
+    {
+        public function open(Openable $openable): void
+        {
+            $openable->open();
+        }
+        
+        public function close(Closeable $openable): void
+        {
+            $openable->close();
+        }
+    }
+
+    class BagPacker
+    {
+        private $opener;
+    
+        public function __construct(Opener $opener)
+        {
+            $this->opener = $opener;
+        }
+        
+        public function pack(Wardrobe $source Bag $target): void
+        {
+            $this->opener->open($source);
+            $this->pack($target, $this->getStuff($source));
+            $this->opener->close($source);
+        }
+                
+        private function pack(Packable $packable, StuffStack $stuff = null): void
+        {
+            $stuff && $packable->pack($stuff);
+        }
+        
+        private function getStuff(Stuffable $stuffContainer): ?StuffStack
+        {
+            return $stuffContainer->getContent();
+        }
+    }
+```
+
 ### Principle 2: At least PHP 7.0
 
 [PHP 7.0](http://php.net/manual/en/migration70.new-features.php) have most of, and [PHP 7.1](http://php.net/manual/en/migration71.new-features.php) have all solutions needed (to forget about the `if` statements and other conditional statements) such as:
