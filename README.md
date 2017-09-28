@@ -3,15 +3,15 @@
 ### TABLE OF CONTENT
 - [Introduction](#introduction)
 - [Principles](#principles)
-    - [Principle 1: No conditions in OOP](principle-1-no-conditions in-oop)
-    - [Principle 2: At least PHP 7.0](principle-2-at-least-php-70)
-    - [Principle 3: There are tree kinds of return](principles-3-there-are-there-kinds-of-return)
-    - [Principle 4: Parameters should have type declarations](principles-4-parameters-should-have-type-declarations)
-- [Level 0: stop using 'elseif' and 'switch' statements](level-0-stop-using-elseif-and-switch-statments)
-- [Level 1: stop using 'else' word](level-1-stop-using-else-word)
-- [Level 2: stop using 'if' word](laravel-2-stop-using-if-word)
-- [Level 3: stop using if shorthand](level-3-stop-using-if-shorthand)
-- [Level 4: Do not use any type of conditions!](level-4-do-not-use-any-type-of-conditions)
+    - [Principle 1: No conditions in OOP](#principle-1-no-conditions in-oop)
+    - [Principle 2: At least PHP 7.0](#principle-2-at-least-php-70)
+    - [Principle 3: There are tree kinds of return](#principles-3-there-are-there-kinds-of-return)
+    - [Principle 4: Parameters should have type declarations](#principles-4-parameters-should-have-type-declarations)
+- [Level 0: stop using 'elseif' and 'switch' statements](#level-0-stop-using-elseif-and-switch-statments)
+- [Level 1: stop using 'else' word](#level-1-stop-using-else-word)
+- [Level 2: stop using 'if' word](#laravel-2-stop-using-if-word)
+- [Level 3: stop using if shorthand](#level-3-stop-using-if-shorthand)
+- [Level 4: Do not use any type of conditions!](#level-4-do-not-use-any-type-of-conditions)
 
 ## Introduction
 
