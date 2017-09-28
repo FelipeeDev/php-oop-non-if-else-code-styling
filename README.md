@@ -15,10 +15,11 @@
 
 ## Introduction
 
-This document contains examples of how to became a real PHP OOP ninja and stops to using conditional statements in your code.
-There are few principles that you have to note before you begin your adventure with new kind of PHP code writing. So let's begin!
+This document contains examples of how to became a real PHP OOP ninja and stops to using conditional statements in your code. First read about principles. Then - when you are ready - proceed the secret techniques of unconditionally programming.
 
 ## Principles
+
+There are few principles that you have to note before you begin your adventure with new kind of PHP code writing. So let's begin!
 
 ### Principle 1: No conditions in OOP
 
@@ -34,7 +35,7 @@ So we can say that object-oriented programming is uncompromising and:
 
 ### Principle 2: At least PHP 7.0
 
-[PHP 7.0](http://php.net/manual/en/migration70.new-features.php) have most solutions and [PHP 7.1](http://php.net/manual/en/migration71.new-features.php) all the solutions needed to forget about the `if` statements such as:
+[PHP 7.0](http://php.net/manual/en/migration70.new-features.php) have most of, and [PHP 7.1](http://php.net/manual/en/migration71.new-features.php) have all solutions needed (to forget about the `if` statements and other conditional statements) such as:
 - type hints and scalar type declaration
 - return type declaration (and nullable types)
 - null coalescing operator
