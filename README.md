@@ -3,7 +3,7 @@
 ### TABLE OF CONTENT
 - [Introduction](#introduction)
 - [Principles](#principles)
-    - [Principle 1: No conditions in OOP](#principle-1-no-conditions in-oop)
+    - [Principle 1: No conditions in OOP](#principle-1-no-conditions-in-oop)
     - [Principle 2: At least PHP 7.0](#principle-2-at-least-php-70)
     - [Principle 3: There are tree kinds of return](#principles-3-there-are-there-kinds-of-return)
     - [Principle 4: Parameters should have type declarations](#principles-4-parameters-should-have-type-declarations)
