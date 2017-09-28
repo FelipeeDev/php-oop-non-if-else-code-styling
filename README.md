@@ -25,7 +25,7 @@ There are few principles that you have to note before you begin your adventure w
 
 *There should NOT be any conditions in clear Object-Oriented Programing.*
 
-The first and the most important principle. Each object should contains methods that are responsible for acting and not for making decisions. So we can say in the other words: The method does not depend on what it receives - it always tries to do what it is responsible for - regardless of the input parameter.
+The first and the most important principle. Each object should contains methods that are responsible for acting and not for making decisions. In the other words: The method does not depend on what it receives - it always tries to do what it is responsible for - regardless of the input parameter.
 
 So we can say that object-oriented programming is uncompromising and:
 
@@ -51,7 +51,7 @@ We can distinguish three kinds of return values:
 
 ### Principle 4: Parameters should have type declarations
 
-All the method's parameter should have type declaration. And that's all for now. You will see later why type hints are so important.
+All the method's parameters should have type declaration. And that's all for now. You will see later why type hints are so important.
 
 ## Level 0: stop using 'elseif' and 'switch' statements
 
