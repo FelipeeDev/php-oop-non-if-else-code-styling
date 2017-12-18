@@ -9,9 +9,9 @@
     - [Principle 4: Parameters should have type declarations](#principles-4-parameters-should-have-type-declarations)
 - [Level 0: stop using 'elseif' and 'switch' statements](#level-0-stop-using-elseif-and-switch-statments)
 - [Level 1: stop using 'else' word](#level-1-stop-using-else-word)
-- [Level 2: stop using 'if' word](#laravel-2-stop-using-if-word)
-- [Level 3: stop using if shorthand](#level-3-stop-using-if-shorthand)
-- [Level 4: Do not use any type of conditions!](#level-4-do-not-use-any-type-of-conditions)
+- [Level 2: stop using if shorthand](#level-3-stop-using-if-shorthand)
+- [Level 3: stop using 'if' word](#laravel-2-stop-using-if-word)
+- [Level 4: Do not use any type of conditions and find the balance](#level-4-do-not-use-any-type-of-conditions)
 
 ## Introduction
 
@@ -182,8 +182,177 @@ How do we can change them? We cn go and change it exacely like the example above
 
 ## Level 1: stop using 'else' word
 
-## Level 2: stop using 'if' word
+A very strange habit is the use of a structure `else` inside classes or even in any unclassified functions.
 
-## Level 3: stop using if shorthand
+What is the sens of using `else` like this:
 
-## Level 4: Do not use any type of conditions!
+```
+    public function getFooOrBar($foo)
+    {
+        $result = '';
+        if ($foo == true) {
+            $result = 'foo';
+        } else {
+            $result = 'bar';
+        }
+        return $result;
+    }
+```
+
+instead of this:
+
+```
+    public function getFooOrBar(bool $foo): string
+    {
+        $result = 'bar';
+        if (true === $foo) {
+            $result = 'foo';
+        }
+        return $result;
+    }
+```
+
+or even better:
+
+```
+    public function getFooOrBar(bool $foo): string
+    {
+        if ($foo) {
+            return 'foo';
+        }
+        return 'bar';
+    }
+```
+
+or maybe oneline version:
+
+```
+    public function getFooOrBar(bool $foo): string
+    {
+        return $foo ? 'foo' : 'bar';
+    }
+```
+
+As you can see We start from 7 lines and finished with only 1 line. What is more readable for experience programmer? I bet you have the right answer.
+
+Other example of using `else` word is a set of a commands like this:
+
+```
+    public function doSomeStaff($withSomethingImportant)
+    {
+        $this->init();
+        $this->setup();
+        if ($withSomethingImportant) {
+            $this->someStaffHere();
+            $this->doSomethingImportant();
+        } else {
+            $this->otherStaffThere();
+            $this->notImportant();
+        }
+        $this->runSomething();
+    }
+```
+
+So there are some interesting solutions for this. First for some instances:
+
+```
+    public function doSomeStaff($withSomethingImportant)
+    {
+        $this->init();
+        $this->setup();
+        if ($withSomethingImportant) {
+            $this->someStaffHere();
+            $this->doSomethingImportant();
+            $this->runSomething();
+            return;
+        }
+        $this->otherStaffThere();
+        $this->notImportant();
+        $this->runSomething();
+    }
+```
+
+which is not so good as:
+
+```
+    public function doSomeStaff($withSomethingImportant)
+    {
+        $this->init();
+        $this->setup();
+        $this->runSomeStaff($withSomethingImportant);
+        $this->runSomething();
+    }
+
+    private function runSomeStaff($withSomethingImportant)
+    {
+        if ($withSomethingImportant) {
+            $this->someStaffHere();
+            $this->doSomethingImportant();
+            return;
+        }
+        $this->otherStaffThere();
+        $this->notImportant();
+    }
+```
+
+but the most readable is:
+
+```
+    public function doSomeStaff($withSomethingImportant)
+    {
+        $this->init();
+        $this->setup();
+        if ($withSomethingImportant) {
+            $this->runImportantStaff();
+            return;
+        }
+        $this->runNotImportant();
+    }
+
+    private function runImportantStaff()
+    {
+        $this->someStaffHere();
+        $this->doSomethingImportant();
+        $this->runSomething();
+    }
+    
+    private function runNotImportant()
+    {
+        $this->otherStaffThere();
+        $this->notImportant();
+        $this->runSomething();
+    }
+```
+
+In this case the choose is individual. It depands on how it really looks like *'inside'*.
+
+## Level 2: stop using if shorthand
+
+If you know now how to avoid the `else` word (and other dirty stuff) - now  we can find a way to eliminate the hidden `if .. else` statment that is shorthand: `?:`. In fact this is exacly the same as using `if .. else` but in more gentle way.
+
+To do this - we need to get back to the example of:
+
+```
+    public function getFooOrBar(bool $foo): string
+    {
+        return $foo ? 'foo' : 'bar';
+    }
+```
+
+It looks realy great but there is hidden `else` which make dissastere inside our code. The point here is to present it in the other way:
+
+```
+    public function getFooOrBar(bool $foo): string
+    {
+        if ($foo) {
+            return 'foo';
+        }
+        return 'bar';
+    }
+```
+
+## Level 3: stop using 'if' word
+
+
+
+## Level 4: Do not use any type of conditions and find the balance!
