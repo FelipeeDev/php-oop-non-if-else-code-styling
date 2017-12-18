@@ -23,7 +23,7 @@ There are few principles that you have to note before you begin your adventure w
 
 ### Principle 1: No conditions in OOP
 
-*There should NOT be any conditions in clear Object-Oriented Programing.*
+*There should NOT be any conditions in clear Object-Oriented Programing Logic Layer.*
 
 The first and the most important principle. Each object should contains methods that are responsible for acting and not for making decisions. In the other words: The method does not depend on what it receives - it always tries to do what it is responsible for - regardless of the input parameter.
 
@@ -75,6 +75,10 @@ So we can say that object-oriented programming is uncompromising and:
     }
 ```
 
+So someone can ask: *But wait! What with making decicions in my application? How can it be automated!?*
+
+As I've metioned in the first words - No conditions should be used in the Application or Busines Logic Layer. All the decicions should be make in the View, Controller (MVC) or Command Bus Layer (CQRS). And that's all what we should get.
+
 ### Principle 2: At least PHP 7.0
 
 [PHP 7.0](http://php.net/manual/en/migration70.new-features.php) have most of, and [PHP 7.1](http://php.net/manual/en/migration71.new-features.php) have all solutions needed (to forget about the `if` statements and other conditional statements) such as:
@@ -96,6 +100,85 @@ We can distinguish three kinds of return values:
 All the method's parameters should have type declaration. And that's all for now. You will see later why type hints are so important.
 
 ## Level 0: stop using 'elseif' and 'switch' statements
+
+First step is to drop on using `elseif` and `switch` statements. I belive that it's easier than you think.
+
+You can easly change this:
+
+```
+    function getFooBar($someVar)
+    {
+        $result = $someVar;
+        if ($someVar > 1) {
+            $result = 'foo';
+        } elseif ($someVar < 0)
+            $result = 'bar';
+        }
+        return $result;
+    }
+```
+
+to this:
+
+```
+    function getFooBar(int $someVar): string
+    {
+        if ($someVar > 1) {
+            return 'foo';
+        } 
+        if ($someVar < 0)
+            return 'bar';
+        }
+        return (string) $someVar;
+    }
+```
+
+It's more clear and we gain one assignment operation less.
+
+So what about switches? 
+
+```
+    function getWeekDay($day)
+    {
+        $dayOfWeek = '';
+        switch ($day) {
+            case 0: $dayOfWeek = 'It's Sunday!';
+                break;
+            case 1: $dayOfWeek = 'It's first day of a week';
+                break;
+            case 2: $dayOfWeek = 'It's second day of a week';
+                break;
+            // etc.
+        }
+        return $dayOfWeek;
+    }
+```
+
+How do we can change them? We cn go and change it exacely like the example above or we can try to map functions like that:
+
+```
+    public function getWeekDay(int $day): string
+    {
+        $functionName = sprintf('get%s', date('l'));
+
+        if (method_exists($this, $functionName)) {
+            return $this->{$functionName}();
+        }
+
+        throw new \Exception(sprintf('There is no week day with index: %s', $day));
+    }
+
+    private function getSunday(): string
+    {
+        return 'It's first day of a week';
+    }
+
+    private function getMonday(): string
+    {
+        return 'It's first day of a week';
+    }
+```
+
 
 ## Level 1: stop using 'else' word
 
